@@ -1,8 +1,8 @@
 package domain;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 import enumeration.PlaneStatus;
@@ -12,23 +12,24 @@ import exceptions.PassengerNotFoundException;
 
 public class Plane {
 
-	private Map<Integer, Customer> passengers;
+	private HashMap<Integer, Passenger> passengers;
 	private String flightNumber;
 	private PlaneStatus status;
 	private ArrayList<Integer> firstClassSeats;
 	private ArrayList<Integer> economyClassSeats;
 	
 	
-	public Plane(Map<Integer, Customer> passengers, String flightNumber) {
+	public Plane(HashMap<Integer, Passenger> passengers, String flightNumber, PlaneStatus status) {
 		this.passengers = passengers;
 		this.flightNumber = flightNumber;
+		this.status = status;
 	}
+
+
 
 	public Passenger findPassengerById(int id) throws PassengerNotFoundException {
 		
-		return (Passenger)passengers.entrySet()
-									.stream()
-									.filter(p -> p.getKey() == id);
+			return passenger;
 		
 		}
 
@@ -39,13 +40,15 @@ public class Plane {
 
 
 
-	public Map<Integer, Customer> getPassengers() {
+
+
+	public HashMap<Integer, Passenger> getPassengers() {
 		return passengers;
 	}
 
 
 
-	public void setPassengers(Map<Integer, Customer> passengers) {
+	public void setPassengers(HashMap<Integer, Passenger> passengers) {
 		this.passengers = passengers;
 	}
 

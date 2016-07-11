@@ -1,6 +1,7 @@
 package domain;
 
 import enumeration.Meal;
+import enumeration.TicketClass;
 
 public class FlightReservation {
 
@@ -9,13 +10,16 @@ public class FlightReservation {
 		private Meal meal;
 		private String reservationNumber;
 		private int seatNumber;
+		private int price;
+		private TicketClass ticketClass;
 		
-		public FlightReservation(Passenger passenger, Plane plane, Meal meal, String reservationNumber, int seatNumber) {
+		public FlightReservation(Passenger passenger, Plane plane, Meal meal, String reservationNumber, int seatNumber, TicketClass ticketClass) {
 			this.passenger = passenger;
 			this.plane = plane;
 			this.meal = meal;
 			this.reservationNumber = reservationNumber;
 			this.seatNumber = seatNumber;
+			this.ticketClass = ticketClass;
 		}
 
 		public Passenger getPassenger() {
@@ -24,6 +28,14 @@ public class FlightReservation {
 
 		public void setPassenger(Passenger passenger) {
 			this.passenger = passenger;
+		}
+
+		public int getPrice() {
+			return price;
+		}
+
+		public void setPrice(int price) {
+			this.price = price;
 		}
 
 		public Plane getPlane() {
@@ -56,6 +68,14 @@ public class FlightReservation {
 
 		public void setSeatNumber(int seatNumber) {
 			this.seatNumber = seatNumber;
+		}
+
+		public TicketClass getTicketClass() {
+			return ticketClass;
+		}
+
+		public void setTicketClass(TicketClass ticketClass) {
+			this.ticketClass = ticketClass;
 		}
 	
 	
