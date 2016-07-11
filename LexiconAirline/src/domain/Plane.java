@@ -2,6 +2,7 @@ package domain;
 
 import java.util.Map;
 
+import enumeration.PlaneStatus;
 import exceptions.PassengerNotFoundException;
 
 
@@ -10,6 +11,7 @@ public class Plane {
 
 	private Map<Integer, Customer> passengers;
 	private String flightNumber;
+	private PlaneStatus status;
 	
 	
 	
@@ -18,7 +20,7 @@ public class Plane {
 		this.flightNumber = flightNumber;
 	}
 
-	public Passenger findById(int id) throws PassengerNotFoundException {
+	public Passenger findPassengerById(int id) throws PassengerNotFoundException {
 		
 		return (Passenger)passengers.entrySet()
 									.stream()
@@ -53,6 +55,14 @@ public class Plane {
 
 	public void setFlightNumber(String flightNumber) {
 		this.flightNumber = flightNumber;
+	}
+
+	public PlaneStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(PlaneStatus status) {
+		this.status = status;
 	}
 	
 	
