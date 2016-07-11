@@ -1,5 +1,8 @@
 package domain;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import enumeration.PlaneStatus;
@@ -12,7 +15,8 @@ public class Plane {
 	private Map<Integer, Customer> passengers;
 	private String flightNumber;
 	private PlaneStatus status;
-	
+	private ArrayList<Integer> firstClassSeats;
+	private ArrayList<Integer> economyClassSeats;
 	
 	
 	public Plane(Map<Integer, Customer> passengers, String flightNumber) {
