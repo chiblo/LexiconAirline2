@@ -4,13 +4,7 @@ import java.util.List;
 
 public class Company {
 
-		private List<Plane> airPlanes;
-		
-		
-		
-	
-	
-	
-	
-	
+    private List<Plane> airPlanes;
+
+
 }

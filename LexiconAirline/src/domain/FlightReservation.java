@@ -1,83 +1,83 @@
 package domain;
 
-import enumeration.Meal;
 import enumeration.TicketClass;
 
 public class FlightReservation {
 
-		private Passenger passenger;
-		private Plane plane;
-		private Meal meal;
-		private String reservationNumber;
-		private int seatNumber;
-		private int price;
-		private TicketClass ticketClass;
-		
-		public FlightReservation(Passenger passenger, Plane plane, Meal meal, String reservationNumber, int seatNumber, TicketClass ticketClass) {
-			this.passenger = passenger;
-			this.plane = plane;
-			this.meal = meal;
-			this.reservationNumber = reservationNumber;
-			this.seatNumber = seatNumber;
-			this.ticketClass = ticketClass;
-		}
+    private Passenger passenger;
+    private Plane plane;
+    private Meal meal;
+    private String reservationNumber;
+    private int seatNumber;
+    private int price;
+    private TicketClass ticketClass;
+    private enumeration.City destination;
+    private enumeration.City departure;
 
-		public Passenger getPassenger() {
-			return passenger;
-		}
 
-		public void setPassenger(Passenger passenger) {
-			this.passenger = passenger;
-		}
+    public FlightReservation(Passenger passenger,  Meal meal, String reservationNumber, int seatNumber, TicketClass ticketClass) {
+        this.passenger = passenger;
+        this.meal = meal;
+        this.reservationNumber = reservationNumber;
+        this.seatNumber = seatNumber;
+        this.ticketClass = ticketClass;
+    }
 
-		public int getPrice() {
-			return price;
-		}
+    public Passenger getPassenger() {
+        return passenger;
+    }
 
-		public void setPrice(int price) {
-			this.price = price;
-		}
+    public void setPassenger(Passenger passenger) {
+        this.passenger = passenger;
+    }
 
-		public Plane getPlane() {
-			return plane;
-		}
+    public int getPrice() {
+        return price;
+    }
 
-		public void setPlane(Plane plane) {
-			this.plane = plane;
-		}
+    public void setPrice(int price) {
+        this.price = price;
+    }
 
-		public Meal getMeal() {
-			return meal;
-		}
+    public Plane getPlane() {
+        return plane;
+    }
 
-		public void setMeal(Meal meal) {
-			this.meal = meal;
-		}
+    public void setPlane(Plane plane) {
+        this.plane = plane;
+    }
 
-		public String getReservationNumber() {
-			return reservationNumber;
-		}
+    public Meal getMeal() {
+        return meal;
+    }
 
-		public void setReservationNumber(String reservationNumber) {
-			this.reservationNumber = reservationNumber;
-		}
+    public void setMeal(Meal meal) {
+        this.meal = meal;
+    }
 
-		public int getSeatNumber() {
-			return seatNumber;
-		}
+    public String getReservationNumber() {
+        return reservationNumber;
+    }
 
-		public void setSeatNumber(int seatNumber) {
-			this.seatNumber = seatNumber;
-		}
+    public void setReservationNumber(String reservationNumber) {
+        this.reservationNumber = reservationNumber;
+    }
 
-		public TicketClass getTicketClass() {
-			return ticketClass;
-		}
+    public int getSeatNumber() {
+        return seatNumber;
+    }
 
-		public void setTicketClass(TicketClass ticketClass) {
-			this.ticketClass = ticketClass;
-		}
-	
-	
-				
+    public void setSeatNumber(int seatNumber) {
+        this.seatNumber = seatNumber;
+    }
+
+    public TicketClass getTicketClass() {
+        return ticketClass;
+    }
+
+    public void setTicketClass(TicketClass ticketClass) {
+        this.ticketClass = ticketClass;
+    }
+
+
 }
