@@ -27,7 +27,6 @@ public class Plane {
 				System.out.println("passenger with id: " + id + " not found");
 			}
 		}
-		
 		throw new PassengerNotFoundException();
 	}
 	
@@ -59,5 +58,18 @@ public class Plane {
 	public void setStatus(PlaneStatus status) {
 		this.status = status;
 	}
-
+	
+	public String getPlaneInfo(){
+	StringBuilder sb = new StringBuilder();
+	sb.append("Flight");
+	sb.append(getFlightNumber());
+	sb.append(getStatus());
+	sb.append(" ");
+	sb.append("");
+	
+		return sb.toString();
+	}
+	
+	
+	
 }
