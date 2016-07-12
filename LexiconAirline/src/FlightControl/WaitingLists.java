@@ -1,10 +1,9 @@
 package FlightControl;
 
-import domain.FlightReservation;
+import Domain.FlightReservation;
 
 import java.util.ArrayList;
 import Enumeration.City;
-import static Enumeration.City.STOCKHOLM;
 
 
 /**

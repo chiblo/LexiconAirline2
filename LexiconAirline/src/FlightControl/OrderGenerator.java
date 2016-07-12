@@ -1,7 +1,9 @@
 package FlightControl;
 
-import com.company.Enum.City;
-import com.company.Enum.TicketClass;
+import Domain.FlightReservation;
+import Domain.Passenger;
+import Enumeration.City;
+import Enumeration.TicketClass;
 
 /**
  * Created by Bardia on 2016-07-11.
@@ -13,13 +15,16 @@ public class OrderGenerator implements Runnable {
     public void run() {
         synchronized (this) {
             FlightReservation order = new FlightReservation();
-            order.setTicketClass(TicketClass.ECONOMY_CLASS);
+            order.setTicketClass(TicketClass.ECOMOMY_CLASS);
             int randomize = (int) (Math.random() * 1.5);
             if (randomize == 1) {
                 order.setTicketClass(TicketClass.FIRST_CLASS);
             }
 
-            order.setNumberOfPassengers((int) (Math.random() * 4.99) + 1);
+            for (int i = 0; i <((int) (Math.random() * 4.99) + 1); i++ ){
+
+                Passenger p = new Passenger();
+            }
             randomize = (int) ((Math.random()) * 11.99);
 
             switch (randomize) {

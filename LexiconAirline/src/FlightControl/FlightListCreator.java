@@ -1,7 +1,8 @@
 package FlightControl;
 
-import com.company.Enum.City;
-import com.company.Enum.TicketClass;
+import Enumeration.City;
+import Enumeration.TicketClass;
+import Domain.FlightReservation;
 
 import java.util.ArrayList;
 import java.util.concurrent.Callable;
