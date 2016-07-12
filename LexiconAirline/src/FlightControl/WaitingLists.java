@@ -3,7 +3,8 @@ package FlightControl;
 import domain.FlightReservation;
 
 import java.util.ArrayList;
-import static enumeration.City;
+import Enumeration.City;
+import static Enumeration.City.STOCKHOLM;
 
 
 /**
