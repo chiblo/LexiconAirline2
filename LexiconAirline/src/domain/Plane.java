@@ -20,7 +20,6 @@ public class Plane {
 	}
 
 	public Passenger findPassengerById(int id) throws PassengerNotFoundException {
-
 		for (Passenger passenger : passengers) {
 			if (passenger.getId() == id) {
 				return passenger;
@@ -28,8 +27,10 @@ public class Plane {
 				System.out.println("passenger with id: " + id + " not found");
 			}
 		}
+		
 		throw new PassengerNotFoundException();
 	}
+	
 
 	public void addPassenger(Passenger passenger) {
 		passengers.add(passenger);
