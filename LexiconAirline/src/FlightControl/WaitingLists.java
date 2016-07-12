@@ -79,4 +79,8 @@ public class WaitingLists {
     static ArrayList<FlightReservation> waitingListStockholmParis = new ArrayList<>();
     static ArrayList<FlightReservation> waitingListParisStockholm = new ArrayList<>();
 
+    public static void clean(City departure, City destination){
+        getWaitingList(departure,destination).forEach(i -> {if (i.isInFlight())getWaitingList(departure,destination).remove(i);});
+    }
+
 }

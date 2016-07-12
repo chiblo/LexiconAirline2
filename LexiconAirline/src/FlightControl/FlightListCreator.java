@@ -10,15 +10,18 @@ import java.util.concurrent.Callable;
 /**
  * Created by User on 2016-07-12.
  */
-public class FlightListCreator implements Callable<ArrayList<FlightReservation>> {
-    City departure;
-    City destination;
-    TicketClass ticketClass;
+class FlightListCreator implements Callable<ArrayList<FlightReservation>> {
+    private City departure;
+    private City destination;
+    private TicketClass ticketClass;
+    private int maxCapacity;
 
-    public FlightListCreator(City departure, City destination, TicketClass ticketClass) {
+    FlightListCreator(City departure, City destination, TicketClass ticketClass) {
         this.departure = departure;
         this.destination = destination;
         this.ticketClass = ticketClass;
+        if(ticketClass == TicketClass.FIRST_CLASS) maxCapacity = 10;
+        else maxCapacity = 20;
     }
 
     @Override
@@ -36,32 +39,30 @@ public class FlightListCreator implements Callable<ArrayList<FlightReservation>>
         return flightList;
     }
 
-    boolean addFirst(ArrayList<FlightReservation> list) {
+    private boolean addFirst(ArrayList<FlightReservation> list) {
         int capacity = 0;
         for (FlightReservation o : list) {
             capacity += o.getNumberOfPassengers();
         }
-
         for (FlightReservation i : WaitingLists.getWaitingList(departure, destination)) {
-            if ((!i.isInFlight()) && (i.getTicketClass() == ticketClass) && (i.getNumberOfPassengers() + capacity == 20)) {
+            if ((!i.isInFlight()) && (i.getTicketClass() == ticketClass) && (i.getNumberOfPassengers() + capacity == maxCapacity)) {
                 list.add(i);
                 i.setInFlight(true);
                 return false;
             }
-
         }
         return true;
     }
 
 
-    void addSecond(ArrayList<FlightReservation> list) {
+    private void addSecond(ArrayList<FlightReservation> list) {
         int capacity = 0;
         for (FlightReservation o : list) {
             capacity += o.getNumberOfPassengers();
         }
 
         for (FlightReservation i : WaitingLists.getWaitingList(departure, destination)) {
-            if ((!i.isInFlight()) && (i.getTicketClass() == ticketClass) && ((i.getNumberOfPassengers() + capacity) < 20)) {
+            if ((!i.isInFlight()) && (i.getTicketClass() == ticketClass) && ((i.getNumberOfPassengers() + capacity) < maxCapacity)) {
                 list.add(i);
                 i.setInFlight(true);
                 break;

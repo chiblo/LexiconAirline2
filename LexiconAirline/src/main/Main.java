@@ -1,10 +1,13 @@
-package main;
+package Main;
+
+import FlightControl.FinalizeReservation;
 
 public class Main {
     public static void main(String[] args) {
 
-        // Main class for testing
 
+
+        FinalizeReservation.run();
 
     }
 }

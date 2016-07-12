@@ -1,42 +1,51 @@
-package domain;
+package Domain;
 
-import enumeration.TicketClass;
+import Enumeration.City;
+import Enumeration.TicketClass;
+
+import java.util.ArrayList;
 
 public class FlightReservation {
 
-    private Passenger passenger;
+    private static int resNumber = 1000;
+
+    private ArrayList<Passenger> passenger;
     private Plane plane;
-    private Meal meal;
     private String reservationNumber;
-    private int seatNumber;
+    private String flightNumber;
     private int price;
     private TicketClass ticketClass;
-    private enumeration.City destination;
-    private enumeration.City departure;
+    private City destination;
+    private City departure;
+    private boolean isInFlight = false;
 
-
-    public FlightReservation(Passenger passenger,  Meal meal, String reservationNumber, int seatNumber, TicketClass ticketClass) {
-        this.passenger = passenger;
-        this.meal = meal;
-        this.reservationNumber = reservationNumber;
-        this.seatNumber = seatNumber;
-        this.ticketClass = ticketClass;
+    public FlightReservation() {
+        this.reservationNumber = "RES" + resNumber;
+        resNumber++;
     }
 
-    public Passenger getPassenger() {
+    public FlightReservation(ArrayList<Passenger> passenger, String reservationNumber, TicketClass ticketClass, City destination, City departure) {
+        this.passenger = passenger;
+        this.reservationNumber = reservationNumber;
+        this.ticketClass = ticketClass;
+        this.departure = departure;
+        this.destination = destination;
+        this.reservationNumber = "RES" + resNumber;
+        resNumber++;
+
+    }
+
+    public ArrayList<Passenger> getPassenger() {
         return passenger;
     }
 
-    public void setPassenger(Passenger passenger) {
+    public void setPassenger(ArrayList<Passenger> passenger) {
         this.passenger = passenger;
     }
 
     public int getPrice() {
-        return price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
+        if (ticketClass == TicketClass.FIRST_CLASS) return passenger.size() * 20000;
+        return passenger.size() * 5000;
     }
 
     public Plane getPlane() {
@@ -47,28 +56,12 @@ public class FlightReservation {
         this.plane = plane;
     }
 
-    public Meal getMeal() {
-        return meal;
-    }
-
-    public void setMeal(Meal meal) {
-        this.meal = meal;
-    }
-
     public String getReservationNumber() {
         return reservationNumber;
     }
 
     public void setReservationNumber(String reservationNumber) {
         this.reservationNumber = reservationNumber;
-    }
-
-    public int getSeatNumber() {
-        return seatNumber;
-    }
-
-    public void setSeatNumber(int seatNumber) {
-        this.seatNumber = seatNumber;
     }
 
     public TicketClass getTicketClass() {
@@ -79,5 +72,31 @@ public class FlightReservation {
         this.ticketClass = ticketClass;
     }
 
+    public int getNumberOfPassengers() {
+        return passenger.size();
+    }
 
+    public boolean isInFlight() {
+        return isInFlight;
+    }
+
+    public void setInFlight(boolean inFlight) {
+        isInFlight = inFlight;
+    }
+
+    public City getDestination() {
+        return destination;
+    }
+
+    public void setDestination(City destination) {
+        this.destination = destination;
+    }
+
+    public City getDeparture() {
+        return departure;
+    }
+
+    public void setDeparture(City departure) {
+        this.departure = departure;
+    }
 }
