@@ -103,16 +103,25 @@ public class Plane implements Runnable {
     }
 
 
-    public String getPlaneInfo() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Flight");
-        sb.append(getFlightNumber());
-        sb.append(getStatus());
-        sb.append(" ");
-        sb.append("");
-
-        return sb.toString();
-    }
+	public void getPlaneInfo(){
+		StringBuffer sb = new StringBuffer("Flight ");
+		sb.append(flightNumber);
+		sb.append(" from ");
+		sb.append(departure);
+		sb.append(" to ");
+		sb.append(destination);
+		
+		if(status == PlaneStatus.READY){
+			sb.append(" is ready for departure");
+		}
+		if((status == PlaneStatus.IN_FLIGHT)){
+			sb.append(" has departed");
+		}
+		if((status == PlaneStatus.MAINTENANCE)){
+			sb.append(" has been canceled due to technical issue");
+		}
+		System.out.println(sb);
+	}
 
 
     static void giveSitNumber(ArrayList<Passenger> passengers, TicketClass ticketClass) {
