@@ -10,8 +10,8 @@ public class Passenger {
     private String seatNumber;
 
     public Passenger() {
-        String id = "PAS"+ idCounter;
-        if(Math.random() > .5) meal = Meal.MEAL_PACKAGE_1;
+        String id = "PAS" + idCounter;
+        if (Math.random() > .5) meal = Meal.MEAL_PACKAGE_1;
         else meal = Meal.MEAL_PACKAGE_2;
     }
 

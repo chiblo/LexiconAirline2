@@ -9,7 +9,7 @@ public class FlightReservation {
 
     private static int resNumber = 1000;
 
-    private ArrayList<Passenger> passenger;
+    private ArrayList<Passenger> passenger  = new ArrayList<>();
     private Plane plane;
     private String reservationNumber;
     private String flightNumber;
@@ -98,5 +98,9 @@ public class FlightReservation {
 
     public void setDeparture(City departure) {
         this.departure = departure;
+    }
+
+    public void setFlightNumber(String flightNumber) {
+        this.flightNumber = flightNumber;
     }
 }

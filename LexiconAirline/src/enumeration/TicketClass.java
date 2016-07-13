@@ -1,5 +1,5 @@
 package Enumeration;
 
-public enum TicketClass{
-        FIRST_CLASS,ECOMOMY_CLASS;
-        }
+public enum TicketClass {
+    FIRST_CLASS, ECONOMY_CLASS;
+}
