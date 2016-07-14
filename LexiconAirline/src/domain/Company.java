@@ -9,7 +9,7 @@ public class Company {
 
     public Company(int numberOfPlanes) {
         for (int i = 0; i < numberOfPlanes; i++) {
-            Plane plane = new Plane(("PLN" + (((i + 1) * 1361) % 1367)), City.STOCKHOLM);
+            Plane plane = new Plane(("PLN" + (((i + 1) * 1733) % 1135)), City.STOCKHOLM);
             airPlanes.add(plane);
             Thread thread = new Thread(plane);
             thread.start();

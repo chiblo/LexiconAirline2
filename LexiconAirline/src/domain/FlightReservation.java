@@ -9,7 +9,7 @@ public class FlightReservation {
 
     private static int resNumber = 1000;
 
-    private ArrayList<Passenger> passenger  = new ArrayList<>();
+    private ArrayList<Passenger> passenger = new ArrayList<>();
     private Plane plane;
     private String reservationNumber;
     private String flightNumber;
@@ -32,8 +32,12 @@ public class FlightReservation {
         this.destination = destination;
         this.reservationNumber = "RES" + resNumber;
         resNumber++;
+        for (Passenger p : passenger) {
+            this.price += p.getTicketPrice();
+        }
 
     }
+
 
     public ArrayList<Passenger> getPassenger() {
         return passenger;
@@ -44,11 +48,7 @@ public class FlightReservation {
     }
 
     public double getPrice() {
-        int result = 0;
-        for (Passenger p : passenger){
-        result += p.getTicketPrice();
-        }
-        return result;
+        return this.price;
     }
 
     public Plane getPlane() {
