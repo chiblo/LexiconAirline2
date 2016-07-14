@@ -1,9 +1,9 @@
-package FlightControl;
+package flightControl;
 
-import Domain.FlightReservation;
-import Domain.Passenger;
-import Enumeration.City;
-import Enumeration.TicketClass;
+import domain.FlightReservation;
+import domain.Passenger;
+import enumeration.City;
+import enumeration.TicketClass;
 
 import java.util.ArrayList;
 
@@ -26,7 +26,7 @@ public class OrderGenerator implements Runnable {
 
             for (int i = 0; i < ((int) (Math.random() * 4.99) + 1); i++) {
 
-                Passenger p = new Passenger();
+                Passenger p = new Passenger(order.getTicketClass());
                 passengers.add(p);
             }
             order.setPassenger(passengers);

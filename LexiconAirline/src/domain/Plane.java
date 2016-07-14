@@ -1,12 +1,12 @@
-package Domain;
+package domain;
 
-import Enumeration.City;
-import Enumeration.Distance;
-import Enumeration.PlaneStatus;
-import Enumeration.TicketClass;
-import Exceptions.PassengerNotFoundException;
-import FlightControl.FlightListCreator;
-import FlightControl.WaitingLists;
+import enumeration.City;
+import enumeration.Distance;
+import enumeration.PlaneStatus;
+import enumeration.TicketClass;
+import exceptions.PassengerNotFoundException;
+import flightControl.FlightListCreator;
+import flightControl.WaitingLists;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
@@ -107,11 +107,11 @@ public class Plane implements Runnable {
 		StringBuffer sb = new StringBuffer("Flight ");
 		sb.append(flightNumber);
 		sb.append(" from ");
-		sb.append(departure);
+		sb.append(startingPoint);
 		sb.append(" to ");
 		sb.append(destination);
 		
-		if(status == PlaneStatus.READY){
+		if(status == PlaneStatus.ON_GROUND){
 			sb.append(" is ready for departure");
 		}
 		if((status == PlaneStatus.IN_FLIGHT)){

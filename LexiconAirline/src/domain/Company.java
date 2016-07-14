@@ -1,6 +1,6 @@
-package Domain;
+package domain;
 
-import Enumeration.City;
+import enumeration.City;
 
 import java.util.ArrayList;
 

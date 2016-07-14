@@ -1,7 +1,7 @@
-package Domain;
+package domain;
 
-import Enumeration.City;
-import Enumeration.TicketClass;
+import enumeration.City;
+import enumeration.TicketClass;
 
 import java.util.ArrayList;
 
@@ -13,7 +13,7 @@ public class FlightReservation {
     private Plane plane;
     private String reservationNumber;
     private String flightNumber;
-    private int price;
+    private double price;
     private TicketClass ticketClass;
     private City destination;
     private City departure;
@@ -43,9 +43,12 @@ public class FlightReservation {
         this.passenger = passenger;
     }
 
-    public int getPrice() {
-        if (ticketClass == TicketClass.FIRST_CLASS) return passenger.size() * 20000;
-        return passenger.size() * 5000;
+    public double getPrice() {
+        int result = 0;
+        for (Passenger p : passenger){
+        result += p.getTicketPrice();
+        }
+        return result;
     }
 
     public Plane getPlane() {

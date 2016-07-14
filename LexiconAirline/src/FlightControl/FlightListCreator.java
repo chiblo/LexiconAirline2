@@ -1,10 +1,10 @@
-package FlightControl;
+package flightControl;
 
-import Domain.FlightReservation;
-import Domain.Passenger;
-import Domain.Plane;
-import Enumeration.City;
-import Enumeration.TicketClass;
+import domain.FlightReservation;
+import domain.Passenger;
+import domain.Plane;
+import enumeration.City;
+import enumeration.TicketClass;
 
 import java.util.ArrayList;
 import java.util.concurrent.Callable;

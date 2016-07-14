@@ -1,6 +1,7 @@
-package Domain;
+package domain;
 
-import Enumeration.Meal;
+import enumeration.Meal;
+import enumeration.TicketClass;
 
 public class Passenger {
     private static int idCounter = 19830916;
@@ -8,11 +9,32 @@ public class Passenger {
     private String id;
     private Meal meal;
     private String seatNumber;
+    private TicketClass ticketClass;
+    private double ticketPrice;
 
-    public Passenger() {
+    public Passenger(TicketClass ticketClass) {
         String id = "PAS" + idCounter;
-        if (Math.random() > .5) meal = Meal.MEAL_PACKAGE_1;
-        else meal = Meal.MEAL_PACKAGE_2;
+        this.ticketClass = ticketClass;
+        switch ((int) (Math.random() * 3.99)) {
+            case 0:
+                meal = Meal.MEAL_PACKAGE_1;
+            case 1:
+                meal = Meal.MEAL_PACKAGE_2;
+            case 2:
+                meal = Meal.MEAL_PACKAGE_3;
+            case 3:
+                meal = Meal.NO_MEAL;
+        }
+        setTicketPrice();
+    }
+
+    public void setTicketPrice() {
+
+
+    }
+
+    public double getTicketPrice() {
+        return ticketPrice;
     }
 
     public void setSeatNumber(String seatNumber) {

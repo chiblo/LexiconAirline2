@@ -1,7 +1,7 @@
-package FlightControl;
+package flightControl;
 
-import Domain.FlightReservation;
-import Enumeration.City;
+import domain.FlightReservation;
+import enumeration.City;
 
 import java.util.ArrayList;
 
