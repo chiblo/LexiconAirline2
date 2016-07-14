@@ -22,6 +22,8 @@ public class Plane implements Runnable {
     private ArrayList<Passenger> firstClass = new ArrayList<>();
     private ArrayList<Passenger> economyClass = new ArrayList<>();
     private ArrayList<Passenger> passengers = new ArrayList<>();
+    private double ticketPrice;
+    private int mileage;
     private ExecutorService pool = Executors.newFixedThreadPool(2);
 
 
@@ -29,6 +31,7 @@ public class Plane implements Runnable {
         this.startingPoint = startingPoint;
         this.flightNumber = flightNumber;
         this.status = PlaneStatus.ON_GROUND;
+        this.mileage = (int) (Math.random() * 50000);
 
     }
 
@@ -36,7 +39,7 @@ public class Plane implements Runnable {
     public void run() {
         while (true) {
             try {
-                System.out.println("Flight " + flightNumber + " " + status + " at " + startingPoint);
+                this.getPlaneInfo();
                 destination = WaitingLists.takeDestination(startingPoint, flightNumber);
                 Thread.sleep(1500);
 
@@ -55,19 +58,38 @@ public class Plane implements Runnable {
 
                 giveSitNumber(firstClass, TicketClass.FIRST_CLASS);
                 giveSitNumber(economyClass, TicketClass.ECONOMY_CLASS);
+                this.setTicketPrice();
 
 
                 status = PlaneStatus.BOARDING;
-                System.out.println("Flight " + flightNumber + " " + status + " for " + destination);
+                this.getPlaneInfo();
+                System.out.println("Total ticket price is " + this.ticketPrice + ". Our profit is " + (this.ticketPrice) * .3 + ".");
+
 
                 Thread.sleep(1500);
 
                 status = PlaneStatus.IN_FLIGHT;
-                System.out.println("Flight " + flightNumber + " " + status + " from "
-                        + startingPoint + " to " + destination);
+                System.out.println("========================================================");
+                this.getPlaneInfo();
+                System.out.println("========================================================");
 
-                Thread.sleep(Distance.takeDistance(startingPoint, destination));
+                int distance = Distance.takeDistance(startingPoint, destination);
+                mileage += distance;
+                Thread.sleep(distance / 2);
+                if (mileage >= 50000) {
+                    this.status = PlaneStatus.NEED_REPAIR;
+                    getPlaneInfo();
+                    System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
 
+                }
+
+                Thread.sleep(distance / 2);
+                if (status == PlaneStatus.NEED_REPAIR) {
+                    this.status = PlaneStatus.MAINTENANCE;
+                    getPlaneInfo();
+                    Thread.sleep(((int) (Math.random()) * 10000) + 2000);
+                    mileage = 0;
+                }
 
                 startingPoint = destination;
                 status = PlaneStatus.ON_GROUND;
@@ -103,25 +125,39 @@ public class Plane implements Runnable {
     }
 
 
-	public void getPlaneInfo(){
-		StringBuffer sb = new StringBuffer("Flight ");
-		sb.append(flightNumber);
-		sb.append(" from ");
-		sb.append(startingPoint);
-		sb.append(" to ");
-		sb.append(destination);
-		
-		if(status == PlaneStatus.ON_GROUND){
-			sb.append(" is ready for departure");
-		}
-		if((status == PlaneStatus.IN_FLIGHT)){
-			sb.append(" has departed");
-		}
-		if((status == PlaneStatus.MAINTENANCE)){
-			sb.append(" has been canceled due to technical issue");
-		}
-		System.out.println(sb);
-	}
+    public void getPlaneInfo() {
+        StringBuffer sb = new StringBuffer("Flight ");
+        sb.append(flightNumber);
+
+        if (status == PlaneStatus.ON_GROUND) {
+            sb.append(" is ready for boarding process at ");
+            sb.append(startingPoint);
+        }
+        if (status == PlaneStatus.BOARDING) {
+            sb.append(" is boarding passengers at ");
+            sb.append(startingPoint);
+            sb.append(". And will depart shortly toward ");
+            sb.append(destination);
+        }
+        if ((status == PlaneStatus.IN_FLIGHT)) {
+            sb.append(" has departed from ");
+            sb.append(startingPoint);
+            sb.append(" toward ");
+            sb.append(destination);
+        }
+        if ((status == PlaneStatus.MAINTENANCE)) {
+            sb.append(" is under maintenance at ");
+            sb.append(destination);
+            sb.append(". And will join the squadron shortly.");
+        }
+
+        if ((status == PlaneStatus.NEED_REPAIR)) {
+            sb.append(" further flights has been canceled due to technical issue. It will be repaired at ");
+            sb.append(destination);
+        }
+        sb.append(".");
+        System.out.println(sb);
+    }
 
 
     static void giveSitNumber(ArrayList<Passenger> passengers, TicketClass ticketClass) {
@@ -177,5 +213,16 @@ public class Plane implements Runnable {
 
     public City getStartingPoint() {
         return startingPoint;
+    }
+
+    public double getTicketPrice() {
+        return ticketPrice;
+    }
+
+    public void setTicketPrice() {
+        for (Passenger p : this.getPassengers()) {
+            this.ticketPrice += p.getTicketPrice();
+
+        }
     }
 }
