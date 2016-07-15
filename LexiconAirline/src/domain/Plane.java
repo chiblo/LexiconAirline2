@@ -148,7 +148,7 @@ public class Plane implements Runnable {
         if ((status == PlaneStatus.MAINTENANCE)) {
             sb.append(" is under maintenance at ");
             sb.append(destination);
-            sb.append(". And will join the squadron shortly.");
+            sb.append(". And will join the squadron shortly");
         }
 
         if ((status == PlaneStatus.NEED_REPAIR)) {
