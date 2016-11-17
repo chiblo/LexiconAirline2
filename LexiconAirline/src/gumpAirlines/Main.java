@@ -1,7 +1,7 @@
 package gumpAirlines;
 
 import domain.Company;
-import flightControl.OrderGenerator;
+import flight_control.OrderGenerator;
 
 public class Main {
     public static void main(String[] args) {

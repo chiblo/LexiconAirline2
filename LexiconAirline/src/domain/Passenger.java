@@ -12,12 +12,11 @@ public class Passenger {
     private double ticketPrice;
     private City departure;
     private City destination;
+    private String reservationNumber;
 
-    public Passenger(City departure, City destination, TicketClass ticketClass) {
+
+    public Passenger() {
         String id = "PAS" + idCounter;
-        this.departure =departure;
-        this.destination = destination;
-        this.ticketClass = ticketClass;
         switch ((int) (Math.random() * 3.99)) {
             case 0:
                 meal = Meal.MEAL_PACKAGE_1;
@@ -31,16 +30,14 @@ public class Passenger {
             case 3:
                 meal = Meal.NO_MEAL;
         }
-        setTicketPrice();
     }
 
-    public void setTicketPrice() {
-        this.ticketPrice = ((Distance.takeDistance(departure, destination)) / 10) + 3500;
-        if (this.ticketClass == TicketClass.FIRST_CLASS) this.ticketPrice *= 4;
-        this.ticketPrice += FoodPrice.getFoodPrice(this);
+    public void setTicketPrice(int baseTicketPrice) {
+        this.ticketPrice = baseTicketPrice + FoodPrice.getFoodPrice(this);
     }
 
     public double getTicketPrice() {
+        setTicketPrice();
         return ticketPrice;
     }
 
@@ -52,12 +49,24 @@ public class Passenger {
         return ticketClass;
     }
 
+    public void setTicketClass(TicketClass ticketClass) {
+        this.ticketClass = ticketClass;
+    }
+
     public void setSeatNumber(String seatNumber) {
         this.seatNumber = seatNumber;
     }
 
     public String getId() {
         return id;
+    }
+
+    public String getReservationNumber() {
+        return reservationNumber;
+    }
+
+    public void setReservationNumber(String reservationNumber) {
+        this.reservationNumber = reservationNumber;
     }
 
     public City getDestination() {

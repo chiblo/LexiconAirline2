@@ -1,4 +1,4 @@
-package flightControl;
+package flight_control;
 
 import domain.FlightReservation;
 import enumeration.City;

@@ -5,8 +5,8 @@ import enumeration.Distance;
 import enumeration.PlaneStatus;
 import enumeration.TicketClass;
 import exceptions.PassengerNotFoundException;
-import flightControl.FlightListCreator;
-import flightControl.WaitingLists;
+import flight_control.FlightListCreator;
+import flight_control.WaitingLists;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;

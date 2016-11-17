@@ -1,6 +1,7 @@
 package domain;
 
 import enumeration.City;
+import enumeration.Distance;
 import enumeration.TicketClass;
 
 import java.util.ArrayList;
@@ -24,15 +25,21 @@ public class FlightReservation {
         resNumber++;
     }
 
-    public FlightReservation(ArrayList<Passenger> passenger, String reservationNumber, TicketClass ticketClass, City destination, City departure) {
+    public FlightReservation(ArrayList<Passenger> passenger, TicketClass ticketClass, City destination, City departure) {
         this.passenger = passenger;
-        this.reservationNumber = reservationNumber;
         this.ticketClass = ticketClass;
         this.departure = departure;
         this.destination = destination;
         this.reservationNumber = "RES" + resNumber;
         resNumber++;
+        int baseTicketPrice = ((Distance.takeDistance(departure, destination)) / 10) + 3500;
+        if (this.ticketClass == TicketClass.FIRST_CLASS) baseTicketPrice *= 4;
         for (Passenger p : passenger) {
+            p.setReservationNumber(this.reservationNumber);
+            p.setDeparture(this.departure);
+            p.setDestination(this.destination);
+            p.setTicketClass(this.ticketClass);
+
             this.price += p.getTicketPrice();
         }
 

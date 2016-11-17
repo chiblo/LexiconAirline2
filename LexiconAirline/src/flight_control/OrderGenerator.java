@@ -1,4 +1,4 @@
-package flightControl;
+package flight_control;
 
 import domain.FlightReservation;
 import domain.Passenger;
@@ -18,19 +18,8 @@ public class OrderGenerator implements Runnable {
         for (int j = 0; j < 100; j++) {
             ArrayList<Passenger> passengers = new ArrayList<>();
             FlightReservation order = new FlightReservation();
-            order.setTicketClass(TicketClass.ECONOMY_CLASS);
-            int randomize = (int) (Math.random() * 1.5);
-            if (randomize == 1) {
-                order.setTicketClass(TicketClass.FIRST_CLASS);
-            }
 
-            for (int i = 0; i < ((int) (Math.random() * 4.99) + 1); i++) {
-
-                Passenger p = new Passenger(order.getTicketClass());
-                passengers.add(p);
-            }
-            order.setPassenger(passengers);
-            randomize = (int) ((Math.random()) * 11.99);
+            int randomize = (int) ((Math.random()) * 11.99);
 
             switch (randomize) {
                 case 1: {
@@ -106,6 +95,22 @@ public class OrderGenerator implements Runnable {
                 }
 
             }
+
+            randomize = (int) (Math.random() * 1.5);
+            if ( randomize == 1) {
+                order.setTicketClass(TicketClass.FIRST_CLASS);
+            }else{
+                order.setTicketClass(TicketClass.ECONOMY_CLASS);
+            }
+
+            for (int i = 0; i < ((int) (Math.random() * 4.99) + 1); i++) {
+
+                Passenger p = new Passenger();
+                passengers.add(p);
+            }
+            order.setPassenger(passengers);
+
+
             synchronized (this) {
                 WaitingLists.addToList(order);
             }
