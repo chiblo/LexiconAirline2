@@ -4,19 +4,21 @@ import enumeration.*;
 
 public class Passenger {
     private static int idCounter = 19830916;
-    private String name = "No Name";
     private String id;
     private Meal meal;
     private String seatNumber;
-    private TicketClass ticketClass;
     private double ticketPrice;
-    private City departure;
-    private City destination;
-    private String reservationNumber;
+    private FlightReservation flightReservation;
 
+    public Passenger(FlightReservation flightReservation) {
+        id = "PAS" + idCounter;
+        idCounter += (Math.random()*10000000)-5000000;
+        this.flightReservation = flightReservation;
+        this.setRandomMeal();
+        setTicketPrice();
+    }
 
-    public Passenger() {
-        String id = "PAS" + idCounter;
+    private void setRandomMeal(){
         switch ((int) (Math.random() * 3.99)) {
             case 0:
                 meal = Meal.MEAL_PACKAGE_1;
@@ -32,12 +34,13 @@ public class Passenger {
         }
     }
 
-    public void setTicketPrice(int baseTicketPrice) {
-        this.ticketPrice = baseTicketPrice + FoodPrice.getFoodPrice(this);
+//  we can change the price of each individual ticket.
+    public void setTicketPrice() {
+        this.ticketPrice = flightReservation.getBaseTicketPrice() + FoodPrice.getFoodPrice(this);
+        flightReservation.setPrice();
     }
 
     public double getTicketPrice() {
-        setTicketPrice();
         return ticketPrice;
     }
 
@@ -46,11 +49,7 @@ public class Passenger {
     }
 
     public TicketClass getTicketClass() {
-        return ticketClass;
-    }
-
-    public void setTicketClass(TicketClass ticketClass) {
-        this.ticketClass = ticketClass;
+        return flightReservation.getTicketClass();
     }
 
     public void setSeatNumber(String seatNumber) {
@@ -61,27 +60,24 @@ public class Passenger {
         return id;
     }
 
-    public String getReservationNumber() {
-        return reservationNumber;
+    public FlightReservation getFlightReservation() {
+        return flightReservation;
     }
 
-    public void setReservationNumber(String reservationNumber) {
-        this.reservationNumber = reservationNumber;
+    public String getReservationNumber() {
+        return flightReservation.getReservationNumber();
     }
 
     public City getDestination() {
-        return destination;
-    }
-
-    public void setDestination(City destination) {
-        this.destination = destination;
+        return flightReservation.getDestination();
     }
 
     public City getDeparture() {
-        return departure;
+        return flightReservation.getDeparture();
     }
 
-    public void setDeparture(City departure) {
-        this.departure = departure;
+    public String getSeatNumber() {
+        return seatNumber;
     }
+
 }

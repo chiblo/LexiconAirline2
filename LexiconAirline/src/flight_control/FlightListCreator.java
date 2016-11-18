@@ -71,7 +71,7 @@ public class FlightListCreator implements Callable<ArrayList<Passenger>> {
     }
 
     private void addToTheList(FlightReservation reservation) {
-        flightList.addAll(reservation.getPassenger());
+        flightList.addAll(reservation.getPassengers());
         reservation.setPlane(plane);
         reservation.setFlightNumber(plane.getFlightNumber());
         reservation.setInFlight(true);

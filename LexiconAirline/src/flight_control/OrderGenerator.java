@@ -12,104 +12,12 @@ import java.util.ArrayList;
  */
 public class OrderGenerator implements Runnable {
 
-
     @Override
     public void run() {
         for (int j = 0; j < 100; j++) {
-            ArrayList<Passenger> passengers = new ArrayList<>();
-            FlightReservation order = new FlightReservation();
-
-            int randomize = (int) ((Math.random()) * 11.99);
-
-            switch (randomize) {
-                case 1: {
-                    order.setDeparture(City.ROME);
-                    order.setDestination(City.PARIS);
-                    break;
-                }
-                case 2: {
-                    order.setDeparture(City.PARIS);
-                    order.setDestination(City.ROME);
-                    break;
-
-                }
-                case 3: {
-                    order.setDeparture(City.ROME);
-                    order.setDestination(City.BERLIN);
-                    break;
-
-                }
-                case 4: {
-                    order.setDeparture(City.BERLIN);
-                    order.setDestination(City.ROME);
-                    break;
-
-                }
-                case 5: {
-                    order.setDeparture(City.ROME);
-                    order.setDestination(City.STOCKHOLM);
-                    break;
-
-                }
-                case 6: {
-                    order.setDeparture(City.STOCKHOLM);
-                    order.setDestination(City.ROME);
-                    break;
-
-                }
-                case 7: {
-                    order.setDeparture(City.BERLIN);
-                    order.setDestination(City.PARIS);
-                    break;
-
-                }
-                case 8: {
-                    order.setDeparture(City.PARIS);
-                    order.setDestination(City.BERLIN);
-                    break;
-
-                }
-                case 9: {
-                    order.setDeparture(City.BERLIN);
-                    order.setDestination(City.STOCKHOLM);
-                    break;
-
-                }
-                case 10: {
-                    order.setDeparture(City.STOCKHOLM);
-                    order.setDestination(City.BERLIN);
-                    break;
-
-                }
-                case 11: {
-                    order.setDeparture(City.PARIS);
-                    order.setDestination(City.STOCKHOLM);
-                    break;
-
-                }
-
-                default: {
-                    order.setDeparture(City.STOCKHOLM);
-                    order.setDestination(City.PARIS);
-                    break;
-                }
-
-            }
-
-            randomize = (int) (Math.random() * 1.5);
-            if ( randomize == 1) {
-                order.setTicketClass(TicketClass.FIRST_CLASS);
-            }else{
-                order.setTicketClass(TicketClass.ECONOMY_CLASS);
-            }
-
-            for (int i = 0; i < ((int) (Math.random() * 4.99) + 1); i++) {
-
-                Passenger p = new Passenger();
-                passengers.add(p);
-            }
-            order.setPassenger(passengers);
-
+            City departure = getRandomCity();
+            FlightReservation order = new FlightReservation(((int) (Math.random() * 4.99) + 1),
+                    getRandomTicketClass(), departure , setRandomDestination(departure));
 
             synchronized (this) {
                 WaitingLists.addToList(order);
@@ -120,5 +28,33 @@ public class OrderGenerator implements Runnable {
                 e.printStackTrace();
             }
         }
+    }
+
+    private City getRandomCity(){
+        int randomize = (int) ((Math.random()) * 4);
+        switch (randomize) {
+            case 0: return City.STOCKHOLM;
+            case 1: return City.PARIS;
+            case 2: return City.BERLIN;
+            case 3: return City.ROME;
+        }
+        return City.STOCKHOLM;
+    }
+
+    private City setRandomDestination(City departure){
+        City destination;
+        do {
+
+            destination = getRandomCity();
+
+        }while(destination == departure);
+        return destination;
+    }
+
+    private TicketClass getRandomTicketClass(){
+        if ( (int) (Math.random() * 1.5) == 1) {
+            return TicketClass.FIRST_CLASS;
+        }
+        return TicketClass.ECONOMY_CLASS;
     }
 }

@@ -10,7 +10,7 @@ public class FlightReservation {
 
     private static int resNumber = 1000;
 
-    private ArrayList<Passenger> passenger = new ArrayList<>();
+    private ArrayList<Passenger> passengers = new ArrayList<>();
     private Plane plane;
     private String reservationNumber;
     private String flightNumber;
@@ -18,44 +18,40 @@ public class FlightReservation {
     private TicketClass ticketClass;
     private City destination;
     private City departure;
+    private int numberOfPassengers;
     private boolean isInFlight = false;
+    private double baseTicketPrice;
 
-    public FlightReservation() {
-        this.reservationNumber = "RES" + resNumber;
-        resNumber++;
-    }
 
-    public FlightReservation(ArrayList<Passenger> passenger, TicketClass ticketClass, City destination, City departure) {
-        this.passenger = passenger;
+    public FlightReservation(int numberOfPassengers, TicketClass ticketClass, City destination, City departure) {
         this.ticketClass = ticketClass;
         this.departure = departure;
         this.destination = destination;
+        this.numberOfPassengers = numberOfPassengers;
         this.reservationNumber = "RES" + resNumber;
         resNumber++;
-        int baseTicketPrice = ((Distance.takeDistance(departure, destination)) / 10) + 3500;
+        this.baseTicketPrice = ((Distance.takeDistance(departure, destination)) / 10) + 3500;
         if (this.ticketClass == TicketClass.FIRST_CLASS) baseTicketPrice *= 4;
-        for (Passenger p : passenger) {
-            p.setReservationNumber(this.reservationNumber);
-            p.setDeparture(this.departure);
-            p.setDestination(this.destination);
-            p.setTicketClass(this.ticketClass);
-
-            this.price += p.getTicketPrice();
+        for (int i = 0; i < numberOfPassengers ; i++) {
+            Passenger p = new Passenger(this);
+            passengers.add(p);
         }
+        setPrice();
 
     }
 
 
-    public ArrayList<Passenger> getPassenger() {
-        return passenger;
-    }
-
-    public void setPassenger(ArrayList<Passenger> passenger) {
-        this.passenger = passenger;
+    public ArrayList<Passenger> getPassengers() {
+        return passengers;
     }
 
     public double getPrice() {
         return this.price;
+    }
+
+    public void setPrice() {
+        for(Passenger p : passengers)
+        this.price += p.getTicketPrice();
     }
 
     public Plane getPlane() {
@@ -70,20 +66,12 @@ public class FlightReservation {
         return reservationNumber;
     }
 
-    public void setReservationNumber(String reservationNumber) {
-        this.reservationNumber = reservationNumber;
-    }
-
     public TicketClass getTicketClass() {
         return ticketClass;
     }
 
-    public void setTicketClass(TicketClass ticketClass) {
-        this.ticketClass = ticketClass;
-    }
-
     public int getNumberOfPassengers() {
-        return passenger.size();
+        return numberOfPassengers;
     }
 
     public boolean isInFlight() {
@@ -98,19 +86,19 @@ public class FlightReservation {
         return destination;
     }
 
-    public void setDestination(City destination) {
-        this.destination = destination;
-    }
-
     public City getDeparture() {
         return departure;
     }
 
-    public void setDeparture(City departure) {
-        this.departure = departure;
-    }
-
     public void setFlightNumber(String flightNumber) {
         this.flightNumber = flightNumber;
+    }
+
+    public String getFlightNumber() {
+        return flightNumber;
+    }
+
+    public double getBaseTicketPrice() {
+        return baseTicketPrice;
     }
 }

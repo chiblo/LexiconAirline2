@@ -46,7 +46,8 @@ public class WaitingLists {
         if (d > Math.max(Math.max(b, c), a)) {
             destination = City.PARIS;
         }
-        System.out.println("To " + City.STOCKHOLM + " " + a +
+
+        System.out.println("From " + departure + " to " + City.STOCKHOLM + " " + a +
                 " to " + City.ROME + " " + b +
                 " to " + City.BERLIN + " " + c +
                 " to " + City.PARIS + " " + d + ". Flight " + flightNumber + " destination set to " + destination);
@@ -56,7 +57,7 @@ public class WaitingLists {
 
     static int waitingListSize(City departure, City destination) {
         int result = 0;
-        if (departure == destination) return 0;
+        if (departure != destination) {
         try {
             for (FlightReservation fr : getWaitingList(departure, destination)) {
                 if (!fr.isInFlight())
@@ -64,14 +65,15 @@ public class WaitingLists {
             }
         } catch (NullPointerException e) {
         }
+        }
         return result;
     }
 
     public static void addToList(FlightReservation flightReservation) {
-        try {
+    //    try {
             getWaitingList(flightReservation.getDeparture(), flightReservation.getDestination()).add(flightReservation);
-        } catch (ArrayIndexOutOfBoundsException e) {
-        }
+  //      } catch (ArrayIndexOutOfBoundsException e) {
+  //      }
     }
 
     public static void printList(City departure, City destination) {
